@@ -8,13 +8,17 @@ public class Ball : MonoBehaviour
     [SerializeField] private SpriteRenderer _sprite;
 
     private BallColor _color;
+    private Vector2Int _position;
+
 
     public BallColor Color => _color;
+    public Vector2Int Position => _position;
 
-    public void SetColor(BallColor color)
+    public void SetBall(BallColor newColor, Vector2Int newPosition)
     {
-        _color = color;
-        _sprite.color = _colors.GetColor(color);
+        _position = newPosition;
+        _color = newColor;
+        _sprite.color = _colors.GetColor(newColor);
     }
 
 }
