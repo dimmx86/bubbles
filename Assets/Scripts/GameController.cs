@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] private InputController _input;
     [SerializeField] private MapController _map;
     [SerializeField] private PlayerBall _prefabPlayerBall;
     [SerializeField] private Transform _firePosition;
