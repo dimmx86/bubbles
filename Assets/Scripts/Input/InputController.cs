@@ -7,7 +7,7 @@ public class InputController : MonoBehaviour
 {
     [SerializeField] private InputPanel _inputPanel;
 
-    [HideInInspector] private UnityEvent<Vector3> OnFire;
+    [HideInInspector] public UnityEvent<Vector3> OnFire;
 
     
     private void OnEnable()

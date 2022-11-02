@@ -34,6 +34,21 @@ public class MapController : MonoBehaviour
         _isReady = true;
     }
 
+    public bool TryGetRandomColor(out BallColor color)
+    {
+        List<BallColor> colors = _map.ColorsInGame();
+        if (colors.Count < 1)
+        {
+            color = BallColor.Red;
+            return false;
+        }
+        else
+        {
+            color = colors[Random.Range(0, colors.Count)];
+            return true;
+        }
+    }
+
     private void AddNewBalls(BallColor[,] balls)
     {
         for (int y = 0; y < balls.GetLength(0); y++)

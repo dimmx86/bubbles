@@ -63,4 +63,22 @@ public class Map
         }
     }
 
+    public List<BallColor> ColorsInGame()
+    {
+        List<BallColor> colors = new List<BallColor>();
+
+        foreach (var line in _mapBalls)
+        {
+            foreach (var item in line)
+            {
+                if (item != null)
+                {
+                    colors.Add(item.Color);
+                }
+            }
+        }
+
+        return colors;
+    }
+
 }
