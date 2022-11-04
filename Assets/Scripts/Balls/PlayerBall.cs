@@ -11,6 +11,7 @@ public class PlayerBall : MonoBehaviour
     [Space]
     [SerializeField] private int _speed;
 
+    private bool _isCollisionBall;
     private BallColor _color;
 
     public BallColor Color => _color;
@@ -25,6 +26,7 @@ public class PlayerBall : MonoBehaviour
 
     public void Fire(Vector2 point)
     {
+        _isCollisionBall = false;
         var direction = new Vector3(point.x - transform.position.x, point.y - transform.position.y, 0);
         direction.Normalize();
         _rb.velocity = direction * _speed;
@@ -32,8 +34,9 @@ public class PlayerBall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.TryGetComponent<Ball>(out Ball ball))
+        if (!_isCollisionBall && collision.transform.TryGetComponent<Ball>(out Ball ball))
         {
+            _isCollisionBall = true;
            OnCollisionBall?.Invoke(transform.position);
         }
     }

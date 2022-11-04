@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
         yield return new WaitUntil(() => _map.IsReady);
 
         _playerBall = Instantiate(_prefabPlayerBall, _firePosition);
+        _playerBall.OnCollisionBall.AddListener(OnCollisionBall);
 
         StartCoroutine(GameCycle());
 
@@ -75,15 +76,22 @@ public class GameController : MonoBehaviour
     private void OnFire(Vector3 point)
     {
         _playerBall.Fire(point);
-        _playerBall.OnCollisionBall.AddListener(OnCollisionBall);
+        _input.OnFire.RemoveListener(OnFire);
+
         SwitchStatusGame(StatusGame.Fire);
     }
 
     private void OnCollisionBall(Vector3 position)
     {
-        _playerBall.OnCollisionBall.RemoveListener(OnCollisionBall);
+        _map.AddBall(_playerBall.Color, position);
         _playerBall.gameObject.SetActive(false);
         SwitchStatusGame(StatusGame.CollisionBall);
+    }
+
+    private void OnDestroy()
+    {
+        _playerBall.OnCollisionBall.RemoveListener(OnCollisionBall);
+
     }
 }
 
